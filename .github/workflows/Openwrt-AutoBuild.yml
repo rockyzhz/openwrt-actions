@@ -152,6 +152,7 @@ jobs:
           mkdir -p ./Firmware/
           find openwrt/bin/targets/ -name "*sysupgrade*bin*" | xargs -i mv -f {} ./Firmware/
           find openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./Firmware/
+          find openwrt/bin/targets/ -name "*vmdk*" | xargs -i mv -f {} ./Firmware/
         
     - name: Upload Packages to release
       if: env.UPLOAD_PACKAGES_DIR == 'true' && env.UPLOAD_TO_REALEASE == 'true' && !cancelled() &&  steps.compile.outputs.status == 'success'
@@ -211,12 +212,19 @@ jobs:
           !./Firmware/*efi*
           !./Firmware/*rootfs*
         
-    - name: Upload EFI Firmware
+    - name: Upload vmdk Firmware
       if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
       uses: actions/upload-artifact@main
       with:
-        name: ${{matrix.target}}_EFI_Firmware
-        path: ./Firmware/*efi*
+        name: ${{matrix.target}}_vmdk_Firmware
+        path: ./Firmware/*vmdk*
+               
+    # - name: Upload EFI Firmware
+    #   if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
+    #   uses: actions/upload-artifact@main
+    #   with:
+    #     name: ${{matrix.target}}_EFI_Firmware
+    #     path: ./Firmware/*efi*
                
     - name: WeChat notification
       if: env.WECHAT_NOTIFICATION == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
