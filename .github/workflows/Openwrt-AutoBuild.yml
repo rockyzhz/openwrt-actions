@@ -211,7 +211,7 @@ jobs:
           ./Firmware/*squashfs*
           !./Firmware/*efi*
           !./Firmware/*rootfs*
-	  !./Firmware/*vmdk*
+          !./Firmware/*vmdk*
         
     - name: Upload vmdk Firmware
       if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
@@ -219,8 +219,8 @@ jobs:
       with:
         name: ${{matrix.target}}_vmdk_Firmware
         path: |
-	  ./Firmware/*vmdk*
-	  !./Firmware/*efi*
+          ./Firmware/*vmdk*
+          !./Firmware/*efi*
                
     # - name: Upload EFI Firmware
     #   if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
