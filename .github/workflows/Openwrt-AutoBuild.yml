@@ -202,16 +202,16 @@ jobs:
         name: OpenWrt_targets_${{matrix.target}}
         path: openwrt/bin/targets
         
-    - name: Upload Firmware
-      if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
-      uses: actions/upload-artifact@main
-      with:
-        name: ${{matrix.target}}_Firmware
-        path: |
-          ./Firmware/*squashfs*
-          !./Firmware/*efi*
-          !./Firmware/*rootfs*
-          !./Firmware/*vmdk*
+    # - name: Upload Firmware
+    #   if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
+    #   uses: actions/upload-artifact@main
+    #   with:
+    #     name: ${{matrix.target}}_Firmware
+    #     path: |
+    #       ./Firmware/*squashfs*
+    #       !./Firmware/*efi*
+    #       !./Firmware/*rootfs*
+    #       !./Firmware/*vmdk*
         
     - name: Upload vmdk Firmware
       if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
