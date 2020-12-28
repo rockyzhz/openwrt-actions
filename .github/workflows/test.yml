@@ -11,6 +11,7 @@ jobs:
     steps:
     - name: Set Date
       run: |
+        timedatectl set-timezone Asia/Shanghai
         date=$(date +%Y-%m-%d)
         echo "DATE=$date" >> $GITHUB_ENV
 
