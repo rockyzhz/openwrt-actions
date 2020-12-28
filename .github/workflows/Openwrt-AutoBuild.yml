@@ -10,7 +10,7 @@ on:
     #   - 'start'
 #  schedule:
 #    - cron: 0 20 * * *
-  # workflow_dispatch:
+  workflow_dispatch:
   watch:
     types: [started]
 

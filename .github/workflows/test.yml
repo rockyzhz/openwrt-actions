@@ -1,0 +1,26 @@
+name: test-actions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    name: test something
+
+  steps:
+    - name: Set Date
+      run: |
+        date=$(date +%Y-%m-%d)
+        echo "DATE=$date"
+
+    - name: get something
+      run: |
+        wget https://texer.cn/config.tar.gz
+
+    - name: upload test file
+      uses: actions/upload-artifact@main
+      with:
+        name: ${date}_test_config.tar.gz
+        path: |
+          *.tar.gz
