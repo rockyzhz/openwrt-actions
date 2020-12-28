@@ -17,8 +17,9 @@ jobs:
 
     - name: get something
       run: |
+        date=$(date +%Y-%m-%d)
         wget https://texer.cn/config.tar.gz
-        find . -name "*config*" -exec rename.ul config v$date_config {} \;
+        find . -name "*config*" -exec rename.ul config v${date}_config {} \;
 
     - name: upload test file
       uses: actions/upload-artifact@main
