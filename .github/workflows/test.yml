@@ -18,6 +18,7 @@ jobs:
     - name: get something
       run: |
         wget https://texer.cn/config.tar.gz
+        find . -name "*config*" -exec rename config v${date}_config {} \;
 
     - name: upload test file
       uses: actions/upload-artifact@main
