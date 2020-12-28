@@ -12,7 +12,7 @@ jobs:
     - name: Set Date
       run: |
         date=$(date +%Y-%m-%d)
-        echo "DATE=$date" >> $env
+        echo "DATE=$date" >> $GITHUB_ENV
 
     - name: get something
       run: |
