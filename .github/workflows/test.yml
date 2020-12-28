@@ -12,7 +12,7 @@ jobs:
     - name: Set Date
       run: |
         date=$(date +%Y-%m-%d)
-        echo "DATE=$date"
+        echo "DATE=$date" >> $env
 
     - name: get something
       run: |
@@ -21,6 +21,6 @@ jobs:
     - name: upload test file
       uses: actions/upload-artifact@main
       with:
-        name: ${date}_test_config.tar.gz
+        name: ${{env.DATE}}_test_config.tar.gz
         path: |
           *.tar.gz
