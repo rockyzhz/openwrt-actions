@@ -35,6 +35,7 @@ jobs:
 
     - name: Set Date
       run: |
+         sudo timedatectl set-timezone Asia/Shanghai
          date=$(date +%Y-%m-%d)
          echo "DATE=$date" >> $GITHUB_ENV
                  
@@ -152,6 +153,7 @@ jobs:
           mkdir -p ./Firmware/
           find openwrt/bin/targets/ -name "*sysupgrade*bin*" | xargs -i mv -f {} ./Firmware/
           find openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./Firmware/
+          find openwrt/bin/targets/ -name "*vmdk*" -exec rename openwrt v$date_OpenWrt {} \;
           find openwrt/bin/targets/ -name "*vmdk*" | xargs -i mv -f {} ./Firmware/
         
     - name: Upload Packages to release
@@ -217,7 +219,7 @@ jobs:
       if: env.UPLOAD_FIRMWARE == 'true' && env.UPLOAD_TO_ARTIFACTS == 'true' && !cancelled() && steps.compile.outputs.status == 'success'
       uses: actions/upload-artifact@main
       with:
-        name: ${{matrix.target}}_vmdk_Firmware
+        name: v${{env.DATE}}_${{matrix.target}}_vmdk_Firmware
         path: |
           ./Firmware/*vmdk*
           !./Firmware/*efi*
