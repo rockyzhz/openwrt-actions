@@ -154,7 +154,7 @@ jobs:
           date=$(date +%Y-%m-%d)
           find openwrt/bin/targets/ -name "*sysupgrade*bin*" | xargs -i mv -f {} ./Firmware/
           find openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./Firmware/
-          find openwrt/bin/targets/ -name "*vmdk*" -exec rename openwrt v${date}_OpenWrt {} \;
+          find openwrt/bin/targets/ -name "*vmdk*" -exec rename.ul openwrt v${date}_OpenWrt {} \;
           find openwrt/bin/targets/ -name "*vmdk*" | xargs -i mv -f {} ./Firmware/
         
     - name: Upload Packages to release
